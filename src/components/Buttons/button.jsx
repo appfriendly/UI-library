@@ -4,13 +4,15 @@ import { Text, StyleSheet, TouchableHighlight } from "react-native";
 export const FButton = (props) => {
     const [isPress, setIsPress] = React.useState(false);
 
-    const touchProps = {
+    const touchProps = { // Функция нажатия на кнопку
         activeOpacity: 1,
-        underlayColor: '#252525',                               // <-- "backgroundColor" will be always overwritten by "underlayColor"
+        underlayColor: '#323232',                               // <-- "backgroundColor" will be always overwritten by "underlayColor"
         style: isPress ? styles.btnPress : styles.btnNormal, // <-- but you can still apply other style changes
         onHideUnderlay: () => setIsPress(false),
         onShowUnderlay: () => setIsPress(true),
-        onPress: () => console.log('user click on btn'),                 // <-- "onPress" is apparently required
+        onPress: () => {
+            console.log('click');
+        },
     };
     return (
         <TouchableHighlight {...touchProps}>
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: '90%',
-        backgroundColor: '#161616',
+        backgroundColor: '#252525',
         paddingHorizontal: 'auto',
         paddingVertical: 14,
         borderRadius: '20',

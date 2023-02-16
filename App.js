@@ -6,7 +6,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Это страница теста компонентов.</Text>
-      <FButton title="Click"/>
+      <FButton title="Click" />
       <StatusBar style="auto" />
     </View>
   );
