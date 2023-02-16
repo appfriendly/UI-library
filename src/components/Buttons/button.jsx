@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
+import { Text, StyleSheet, TouchableHighlight } from "react-native";
 
 export const FButton = (props) => {
     const [isPress, setIsPress] = React.useState(false);
