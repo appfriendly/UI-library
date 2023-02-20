@@ -3,10 +3,17 @@ import { StyleSheet, Text, View } from 'react-native';
 import { FButton } from './src/components/Buttons/button'
 
 export default function App() {
+  function test () {
+    console.log('click')
+  }
   return (
     <View style={styles.container}>
       <Text>Это страница теста компонентов.</Text>
-      <FButton title="Click" />
+      <FButton title="Click" background="white" function={test} />
+      <FButton title="Click" background="black" />
+      <FButton title="Click" background="green" />
+      <FButton title="Click" background="blue" />
+      <FButton title="Click" background="red" />
       <StatusBar style="auto" />
     </View>
   );
