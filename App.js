@@ -1,20 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, Text} from 'react-native';
 
 export default function App() {
+
   return (
+        
+
     <View style={styles.container}>
-      <Text>Это страница теста компонентов.</Text>
-      <StatusBar style="auto" />
+       
+        <Text style = {{fontSize: 20}}>
+          Эта страница для тестов
+        </Text>
+        <StatusBar style="auto" />
+ 
     </View>
+      
+
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+
+container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    margin: 10,
   },
 });
