@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Text, StyleSheet, TouchableHighlight, Image } from "react-native";
+import { Text, StyleSheet, TouchableHighlight, Image, View } from "react-native";
 
 export const FButton = (props) => {
     const [BtnTitleColor, setBtnTitleColor] = React.useState(null);
@@ -31,32 +31,43 @@ export const FButton = (props) => {
             setBtnBackgroundClick('#2B73FF');
         }
     })
+    React.useEffect(() => {
+        if (props.width > 0)  {
+            setBtnWidth(props.width + '%');
+        } else {
+            setBtnWidth('90%')
+        }
+    })
+
 
     const styles = StyleSheet.create({ // button styles
         title: {
             color: BtnTitleColor,
-            fontSize: 28,
+            fontSize: 32,
+            textAlign: 'left'
         },
         btnNormal: {
-            flex: '0',
+            flex: 0,
             justifyContent: 'center',
             alignItems: 'center',
+            justifyContent: 'center',
             width: BtnWidth,
             backgroundColor: BtnBackgroundColor,
             paddingHorizontal: 'auto',
-            paddingVertical: 14,
-            borderRadius: '20',
+            textAlign: 'center',
+            paddingVertical: 8,
+            borderRadius: 18,
             marginBottom: 20,
           },
         btnPress: {
-            flex: '0',
+            flex: 0,
             justifyContent: 'center',
             alignItems: 'center',
             width: BtnWidth,
             backgroundColor: BtnBackgroundColor,
             paddingHorizontal: 'auto',
-            paddingVertical: 14,
-            borderRadius: '20',
+            paddingVertical: 8,
+            borderRadius: 18,
             marginBottom: 20
         }
     });
@@ -71,7 +82,19 @@ export const FButton = (props) => {
     };
     return (
         <TouchableHighlight {...touchProps}>
-            <Text style={styles.title}>{props.title}</Text>
+            <View style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+            }}>
+                <Image source={require(`../../../assets/icon.png`)} style={{
+                    width: 24,
+                    height: 24
+                }}/>
+                <Text style={styles.title}>
+                    {props.title}
+                </Text>
+            </View>
         </TouchableHighlight>
     )
 }

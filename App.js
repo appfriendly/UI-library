@@ -4,16 +4,12 @@ import { FButton } from './src/components/Buttons/button'
 
 export default function App() {
   function test () {
-    console.log('click')
+    console.log('123')
   }
   return (
     <View style={styles.container}>
       <Text>Это страница теста компонентов.</Text>
-      <FButton title="Click" background="white" function={test} />
-      <FButton title="Click" background="black" />
-      <FButton title="Click" background="green" />
-      <FButton title="Click" background="blue" />
-      <FButton title="Click" background="red" />
+      <FButton background="blue" function={test} title="click"/>
       <StatusBar style="auto" />
     </View>
   );

@@ -18,5 +18,17 @@
   "devDependencies": {
     "@babel/core": "^7.12.9"
   },
-  "private": true
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/appfriendly/UI-library.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/appfriendly/UI-library/issues"
+  },
+  "homepage": "https://github.com/appfriendly/UI-library#readme",
+  "description": ""
 }
