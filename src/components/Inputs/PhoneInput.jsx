@@ -9,7 +9,9 @@ export default function App() {
   const [phoneError, setPhoneError] = useState('Поле должно быть заполнено');
   const [phoneRight, setPhoneRight] = useState(false);
   const [phoneRightText, setPhoneRightText] = useState('Все верно!');
+  const re = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/
 
+  //  /^[+](\d{1})[(](\d{3})[)][ ](\d{3})[-](\d{2})[-](\d{2})$/
   const blurHandler = () => {
     setPhoneDirty(true)
     if(phone == ''){
@@ -28,8 +30,7 @@ export default function App() {
     GreenOrRed = {borderColor: '#00FF66'}
   }
 
-  const phoneHandler = (e) =>{
-    const re = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/
+  /*const phoneHandler = (e) =>{
     if(!re.test(String(phone).toLowerCase())){
       setPhoneError('Некорректный номер')
       setPhoneRight(false)
@@ -40,7 +41,7 @@ export default function App() {
       setPhoneError('')
       setPhoneRight(true)
     }
-  }
+  }*/
 
   return (
 
@@ -58,11 +59,24 @@ export default function App() {
           value={phone}
           name = 'mask'
           style={{flex:1, paddingLeft: 6, fontSize:17}}
-          onChange={e=>phoneHandler(e)}
+          //onChange={e=>phoneHandler(e)}
           onChangeText={(masked, unmasked) => {
             setPhone(masked); 
             //console.log(masked);
             console.log(unmasked);
+            if(!re.test(String(phone).toLowerCase())){
+              setPhoneError('Некорректный номер')
+              setPhoneRight(false)
+              setPhoneDirty(true)
+            }else if(phone == ''){
+              setPhoneRight(false)
+              setPhoneDirty(true)
+              setPhoneError('Поле должно быть заполнено')
+            }else{
+              setPhoneError('')
+              setPhoneRight(true)
+              setPhoneDirty(false)
+            }
           }}
           maxLength={17}
           onBlur={e => blurHandler(e)}

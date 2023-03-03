@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, Image, Animated, TouchableWithoutFeedback, Keyboard, Text} from 'react-native';
+import { StyleSheet, View, Image, TouchableWithoutFeedback, TextInput, Keyboard, Text} from 'react-native';
 import React, {useState, useRef} from 'react';
-import MaskInput, { Masks } from 'react-native-mask-input';
 
 export default function App() {
   const [phone, setPhone] = useState('');
@@ -9,40 +8,24 @@ export default function App() {
   const [phoneError, setPhoneError] = useState('Поле должно быть заполнено');
   const [phoneRight, setPhoneRight] = useState(false);
   const [phoneRightText, setPhoneRightText] = useState('Все верно!');
-  const re = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/
+  const [math, setMath] = useState(0);
 
   const blurHandler = () => {
     setPhoneDirty(true)
     if(phone == ''){
       setPhoneRight(false)
       setPhoneError('Поле должно быть заполнено')
-    }else if(!re.test(String(phone).toLowerCase())){
-      setPhoneError('Некорректный номер')
-      setPhoneRight(false)
     }
   }
 
   let GreenOrRed = {
-    transition:'3s',
+    
   };
 
   if(phoneDirty == true && phoneRight == false){
     GreenOrRed = {borderColor: '#FF3D31'}
   } else if(phoneRight == true){
     GreenOrRed = {borderColor: '#00FF66'}
-  }
-
-  const phoneHandler = (e) =>{
-    if(!re.test(String(phone).toLowerCase())){
-      setPhoneError('Некорректный номер')
-      setPhoneRight(false)
-    }else if({phone} == ''){
-      setPhoneError('Поле должно быть заполнено')
-      setPhoneRight(false)
-    }else{
-      setPhoneError('')
-      setPhoneRight(true)
-    }
   }
 
   return (
@@ -54,25 +37,34 @@ export default function App() {
     <View style={styles.container}>
        
         <View style={[styles.SectionStyle, GreenOrRed]}>
- 
-        <Image source={require('./assets/phone.png')} style={styles.ImageStyle} />
 
-        <MaskInput
+        <TextInput
           value={phone}
-          name = 'mask'
-          style={{flex:1, paddingLeft: 6, fontSize:17}}
-          onChange={e=>phoneHandler(e)}
-          onChangeText={(masked, unmasked) => {
-            setPhone(masked); 
-            //console.log(masked);
-            console.log(unmasked);
+          style={{flex:1, paddingLeft: 15, fontSize:17}}
+          onChangeText={(phone) => {
+            setPhone(phone); 
+            setMath(phone.length)
+            if(phone.includes(' ')){
+              setPhoneDirty(true)
+              setPhoneError('HSHSHSHSH')
+              setPhoneRight(false)
+            }else if(phone == ''){
+              setPhoneRight(false)
+              setPhoneError('Поле должно быть заполнено')
+            }else{
+              setPhoneError('')
+              setPhoneRight(true)
+              setPhoneDirty(false)
+            }
           }}
-          maxLength={17}
+          maxLength={15}
           onBlur={e => blurHandler(e)}
-          keyboardType='phone-pad'
-          mask={['+', /\d/ ,'(' ,/\d/, /\d/, /\d/, ')', ' ' ,/\d/, /\d/, /\d/, '-' ,/\d/, /\d/, '-' ,/\d/,/\d/]}   
-          placeholder = 'Введите номер телефона' 
+          placeholder = 'Введите текст' 
           />
+
+          <Text style = {{paddingRight: 15, fontSize: 13, color: '#707070'}}>
+            {math}/15
+          </Text>
  
         </View>
         
@@ -118,8 +110,7 @@ container: {
   error: {
     color: '#FF3D31',
     marginLeft: 2,
-    fontSize: 10,
-    transition:'color .3s' 
+    fontSize: 10
   },
   
   SectionStyle: {
@@ -133,15 +124,15 @@ container: {
     borderRadius: 10 ,
     marginLeft: 10,
     marginRight: 10,
-    marginBottom: 3,
+    marginBottom: 3
 },
  
 ImageStyle: {
     padding: 10,
     margin: 5,
     marginLeft: 15,
-    height: 22,
-    width: 22,
+    height: 20,
+    width: 20,
     resizeMode : 'stretch',
     alignItems: 'center',
 },
